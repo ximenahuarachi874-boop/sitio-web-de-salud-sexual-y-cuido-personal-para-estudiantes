@@ -1,0 +1,869 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Salud Adolescente</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ===== ESTILO GENERAL ===== */
+body{
+    margin:0;
+    font-family: segoe UI, sans-serif;
+    height: 100vh;
+    background-image: url("imag/imagen6.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+/* OSCURECER O SUAVIZAR EL FONDO */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.15);
+    z-index:-1;
+}
+/* ===== MENÚ SUPERIOR ===== */
+.menu{
+    position:fixed;
+    top:20px;
+    width:100%;
+    text-align:center;
+}
+.menu button{
+    background:#e6d6ff;
+    border:none;
+    padding:10px 20px;
+    margin:5px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.menu button:hover{
+    background:#d6c2ff;
+}
+
+/* ===== PANTALLAS ===== */
+.pantalla{
+    display:none;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.activa{
+    display:flex;
+}
+
+/* ===== CAJAS ===== */
+.caja{
+    background: rgba(255,255,255,0.20);
+    backdrop-filter: blur(20px);
+    padding:40px;
+    border-radius:20px;
+    width:80%;
+    max-width:900px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== SUBCAJAS ===== */
+.subcaja{
+    background: rgba(255,255,255,0.9);
+    padding:15px;
+    border-radius:15px;
+    margin:10px 0;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:left;
+}
+
+/* ===== BOTONES ===== */
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:20px;
+    margin:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.azul{ background:#cde7ff; }
+.rosa{ background:#ffd6ec; }
+.lila{ background:#e6d6ff; }
+
+/* ===== COLUMNAS ===== */
+.columna{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:20px;
+}
+
+.columna button{
+    width:100%;
+}
+
+/* ===== TEXTO ===== */
+h1{
+    color:#5a4b81;
+}
+.galeria{
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.galeria img{
+    width: 200px;
+    height:120px;
+    object-fit:cover;
+    border-radius:15px;
+}
+p{
+    color:#555;
+    text-align:left;
+    line-height:1.6;
+}
+
+</style>
+
+<script>
+function mostrar(id){
+    let pantallas = document.querySelectorAll('.pantalla');
+    pantallas.forEach(p => p.classList.remove('activa'));
+    document.getElementById(id).classList.add('activa');
+}
+</script>
+<script>
+
+function responder(){
+
+let pregunta =
+document.getElementById("pregunta").value.toLowerCase();
+
+let respuesta =
+"Lo siento, amiguito 💜. Todavía no conozco la respuesta a esa pregunta. Puedes preguntarme sobre autoestima, estrés, ansiedad, alimentación, sueño, autocuidado o presión social";
+if(pregunta.includes("qué es la autoestima") || pregunta.includes("que es la autoestima")){
+    respuesta="La autoestima es la forma en que te ves y te valoras. Recuerda que tu valor no depende de las opiniones de los demás, sino de quién eres realmente.";
+}
+
+else if(pregunta.includes("baja autoestima")){
+    respuesta="Si sientes que tienes baja autoestima, intenta recordar tus cualidades y logros. Todos tenemos cosas valiosas que aportar, incluso cuando no las vemos.";
+}
+
+else if(pregunta.includes("estoy triste")){
+    respuesta="Lamento que te sientas así. Hablar con alguien de confianza, escuchar música o hacer algo que disfrutes puede ayudarte a sentirte mejor.";
+}
+
+else if(pregunta.includes("estresado") || pregunta.includes("estrés")){
+    respuesta="Respira profundo. No tienes que resolver todo de una vez. Ve paso a paso y recuerda que descansar también es importante.";
+}
+
+else if(pregunta.includes("qué hago si estoy nervioso")){
+    respuesta="Es normal sentirse nervioso. Intenta respirar lentamente y recordar que no necesitas ser perfecto para hacerlo bien.";
+}
+
+else if(pregunta.includes("qué es la presión social")){
+    respuesta="La presión social ocurre cuando otras personas intentan influir en tus decisiones. Recuerda que decir 'no' también es una muestra de valentía.";
+}
+
+else if(pregunta.includes("cómo dormir mejor")){
+    respuesta="Procura dejar el celular unos minutos antes de dormir, mantener horarios regulares y crear un ambiente tranquilo para descansar.";
+}
+
+else if(pregunta.includes("por qué dormir es importante")){
+    respuesta="Dormir bien ayuda a tu cuerpo a recuperarse, mejora tu concentración y te da energía para afrontar el día.";
+}
+
+else if(pregunta.includes("cómo cuidar mi piel")){
+    respuesta="Lava tu rostro con suavidad, usa protector solar y toma suficiente agua. Tu piel agradecerá esos pequeños cuidados diarios.";
+}
+
+else if(pregunta.includes("cómo mejorar mi alimentación")){
+    respuesta="No se trata de comer perfecto, sino de buscar equilibrio. Intenta incluir frutas, verduras y suficiente agua en tu día.";
+}
+
+else if(pregunta.includes("qué es el autocuidado")){
+    respuesta="El autocuidado es dedicar tiempo a tu bienestar físico y emocional. Cuidarte no es egoísmo, es una forma de quererte.";
+}
+
+else if(pregunta.includes("ansiedad")){
+    respuesta="La ansiedad puede hacer que te preocupes demasiado por situaciones futuras. Respira profundo y recuerda que puedes pedir ayuda cuando lo necesites.";
+}
+
+else if(pregunta.includes("me siento solo")){
+    respuesta="Sentirse solo puede ser difícil. Intenta acercarte a alguien de confianza. A veces una conversación sincera puede hacer una gran diferencia.";
+}
+
+else if(pregunta.includes("cómo ser más feliz")){
+    respuesta="La felicidad no significa estar bien todo el tiempo. También se construye disfrutando pequeños momentos y valorando lo bueno que tienes.";
+}
+
+else if(pregunta.includes("cómo tener amigos")){
+    respuesta="Sé tú mismo, escucha a los demás y muestra interés genuino. Las amistades verdaderas se construyen poco a poco.";
+}
+else if(pregunta.includes("qué es el acné") || pregunta.includes("que es el acne")){
+    respuesta="El acné es una condición común durante la adolescencia. Aparece cuando los poros se obstruyen con grasa y células muertas. No te preocupes, es algo muy normal.";
+}
+
+else if(pregunta.includes("por qué tengo granos") || pregunta.includes("porque tengo granos")){
+    respuesta="Los granos suelen aparecer por cambios hormonales, especialmente durante la adolescencia. Mantener una buena higiene facial puede ayudar a controlarlos.";
+}
+
+else if(pregunta.includes("cómo quitar los granos") || pregunta.includes("como quitar los granos")){
+    respuesta="No los exprimas, amiguito 💜. Lava tu rostro con suavidad y mantén una rutina de cuidado constante. La paciencia es importante.";
+}
+
+else if(pregunta.includes("cada cuánto debo lavar mi cara")){
+    respuesta="Lo recomendable es lavar tu rostro dos veces al día: por la mañana y antes de dormir.";
+}
+
+else if(pregunta.includes("por qué usar protector solar")){
+    respuesta="El protector solar ayuda a proteger tu piel de los rayos del sol, previene manchas y cuida tu piel a largo plazo.";
+}
+
+else if(pregunta.includes("qué es el protector solar")){
+    respuesta="Es un producto que protege tu piel de los rayos ultravioleta del sol y ayuda a prevenir daños y quemaduras.";
+}
+
+else if(pregunta.includes("mi piel es grasa")){
+    respuesta="Si tu piel es grasa, intenta usar productos suaves y específicos para tu tipo de piel. Tener piel grasa es normal y se puede cuidar fácilmente.";
+}
+
+else if(pregunta.includes("mi piel es seca")){
+    respuesta="La piel seca necesita hidratación. Beber agua y usar una crema hidratante adecuada puede ayudar mucho.";
+}
+
+else if(pregunta.includes("por qué debo tomar agua")){
+    respuesta="Tomar agua ayuda a mantener tu cuerpo y tu piel hidratados. Además, contribuye a que te sientas con más energía.";
+}
+
+else if(pregunta.includes("cómo tener una piel sana")){
+    respuesta="Una piel sana se logra con limpieza, hidratación, protector solar, buena alimentación y suficiente descanso.";
+}
+
+else if(pregunta.includes("el maquillaje daña la piel")){
+    respuesta="No necesariamente. Lo importante es retirar el maquillaje antes de dormir y mantener una buena limpieza facial.";
+}
+
+else if(pregunta.includes("por qué salen puntos negros")){
+    respuesta="Los puntos negros aparecen cuando los poros se llenan de grasa y quedan expuestos al aire. Son muy comunes en la adolescencia.";
+}
+
+else if(pregunta.includes("qué alimentos ayudan a la piel")){
+    respuesta="Las frutas, verduras y el agua ayudan a mantener una piel saludable. Una alimentación equilibrada beneficia a todo tu cuerpo.";
+}
+
+else if(pregunta.includes("por qué debo cuidar mi piel")){
+    respuesta="Porque tu piel te protege todos los días. Cuidarla es una forma de cuidar tu salud y sentirte mejor contigo mismo.";
+}
+
+let chat =
+document.getElementById("chatMensajes");
+
+chat.innerHTML +=
+"<div class='user'>" + pregunta + "</div>";
+
+chat.innerHTML +=
+"<div class='bot'>" + respuesta + "</div>";
+
+document.getElementById("pregunta").value="";
+
+chat.scrollTop = chat.scrollHeight;
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- MENÚ -->
+<div class="menu">
+    <button onclick="mostrar('inicio')">Inicio</button>
+    <button onclick="mostrar('masculino')">Masculino</button>
+    <button onclick="mostrar('femenino')">Femenino</button>
+    <button onclick="mostrar('general')">General</button>
+</div>
+
+<!-- INICIO -->
+<div id="inicio" class="pantalla activa">
+<div class="caja">
+<h1>Cuidar tu cuerpo y tu mente es la mejor forma de ser dueño de tus decisiones</h1>
+<p>Esta página brinda información clara sobre salud física, emocional y hábitos en la adolescencia.</p>
+
+<button class="azul" onclick="mostrar('masculino')">Área Masculina</button>
+<button class="rosa" onclick="mostrar('femenino')">Área Femenina</button>
+<button class="lila" onclick="mostrar('general')">Zona General</button>
+</div>
+</div>
+
+<!-- MASCULINO -->
+<div id="masculino" class="pantalla">
+<div class="caja">
+<h1>ÁREA MASCULINA</h1>
+
+<div class="columna">
+<button onclick="mostrar('mentalM')">Salud Mental</button>
+<button onclick="mostrar('cuidadoM')">Cuidado Personal</button>
+<button onclick="mostrar('fisicaM')">Salud Física</button>
+</div>
+
+<button onclick="mostrar('inicio')">Volver</button>
+</div>
+</div>
+
+<!-- SALUD MENTAL MENU -->
+<div id="mentalM" class="pantalla">
+<div class="caja">
+<h1>SALUD MENTAL</h1>
+<div class="galeria">
+    <img src="imag/imagen15.jpg">
+    <img src="imag/imagen16.jpg">
+    <img src="imag/imagen17.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('emocionM')">Gestión emocional</button>
+<button onclick="mostrar('presionM')">Presión social</button>
+<button onclick="mostrar('autoestimaM')">Autoestima</button>
+<button onclick="mostrar('relacionesM')">Relaciones</button>
+</div>
+
+<button onclick="mostrar('masculino')">Volver</button>
+</div>
+</div>
+
+<!-- CONTENIDOS -->
+<div id="emocionM" class="pantalla">
+<div class="caja">
+<h1>GESTION EMOCIONAL"El arte de entenderte"</h1>
+<div class="subcaja">
+<strong><p>Es aprender a identificar qué sientes, entender por qué lo sientes y decidir qué hacer con eso sin que la emoción te controle. Es como ser el capitán de tu propio barco: aunque no puedes elegir el clima (las emociones), sí puedes decidir cómo mover las velas para navegar seguro.
+A menudo nos enseñan que los hombres deben ser “fuertes” y no mostrar sentimientos. Pero la verdadera fuerza está en reconocer cuando estás triste, enojado o confundido. Gestionar tus emociones te ayuda a evitar conflictos y a sentirte en paz contigo mismo.
+“Cuidar tus emociones es una parte tan importante de tu salud como cuidar tu cuerpo.</strong></p>
+</div>
+<button onclick="mostrar('mentalM')">Volver</button>
+</div>
+</div>
+
+<div id="presionM" class="pantalla">
+<div class="caja">
+<h1>PRESIÓN SOCIAL</h1>
+<div class="subcaja">
+<strong><p>Es la fuerza que tus amigos o el entorno ejercen sobre ti para que hagas algo que ellos quieren, solo para ser aceptado o evitar que se burlen de ti.
+Muchas veces creemos que si decimos “no”, perderemos a nuestros amigos, pero la realidad es que los amigos reales respetan tus límites. 
+“Si te obliga a ponerte en riesgo, no es una amistad, es una presión.</strong></p>
+</div>
+<button onclick="mostrar('mentalM')">Volver</button>
+</div>
+</div>
+
+<div id="autoestimaM" class="pantalla">
+<div class="caja">
+<h1>AUTOESTIMA "Valorando quíen eres"</h1>
+<div class="subcaja">
+<strong><p>No se trata de creerse el mejor, sino de aceptarse con virtudes y defectos.
+En la secundaria, la presión por “encajar” o lucir de cierta forma es enorme. Tu valor no depende de cuantos likes recibas ni de si eres el más musculoso o el más gracioso. La autoestima masculina sana nace de respetar tu propio proceso y tus propios valores.
+“ Cuidar de ti mismo no es egoísmo, es amor propio.</strong></p>
+</div>
+<button onclick="mostrar('mentalM')">Volver</button>
+</div>
+</div>
+
+<div id="relacionesM" class="pantalla">
+<div class="caja">
+<h1>RELACIONES "Vinculos que suman"</h1>
+<div class="subcaja">
+<strong><p>Cómo nos conectamos con amigos, pareja y familia.
+las relaciones sanas se basan en la responsabilidad. Esto significa ser claro con lo que sientes y cuidar el impacto de tus palabras o acciones que tienen en los demás. Aprender a poner límites y a respetar los de otros es la base de cualquier relación exitosa. 
+“Si un vínculo te quita paz o libertad, no es saludable.</strong></p>
+</div>
+<button onclick="mostrar('mentalM')">Volver</button>
+</div>
+</div>
+
+<!-- CUIDADO PERSONAL -->
+<div id="cuidadoM" class="pantalla">
+<div class="caja">
+<h1>Cuidado Personal</h1>
+<div class="galeria">
+    <img src="imag/imagen18.jpg">
+    <img src="imag/imagen19.jpg">
+    <img src="imag/imagen20.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('higieneM')">Higiene</button>
+<button onclick="mostrar('pielM')">Piel</button>
+<button onclick="mostrar('cabelloM')">Cabello</button>
+<button onclick="mostrar('presentacionM')">Presentación</button>
+</div>
+
+<button onclick="mostrar('masculino')">Volver</button>
+</div>
+</div>
+
+<div id="higieneM" class="pantalla">
+<div class="caja">
+<h1>HIGIENE</h1>
+<div class="subcaja"><strong><p>Es el conjunto de hábitos diarios que nos permiten mantener el cuerpo limpio, prevenir enfermedades y fortalecer nuestra seguridad personal. En la adolescencia, es la base del respeto hacia uno mismo.
+Una buena higiene no oculta el olor con perfume, lo previene con limpieza.
+</strong></p></div>
+<button onclick="mostrar('cuidadoM')">Volver</button>
+</div>
+</div>
+
+<div id="pielM" class="pantalla">
+<div class="caja">
+<h1>HIGIENE FACIAL "Skincare Masculino"</h1>
+<div class="subcaja"><strong><p>Lavado de rostro (mañana y noche) para controlar el exceso de grasa y prevenir el acné sin dañar la piel. Usar un jabón específico para el rostro (el de cuerpo es muy fuerte). 
+El objetivo es prevenir el acné y las irritaciones.
+</strong></p></div>
+<button onclick="mostrar('cuidadoM')">Volver</button>
+</div>
+</div>
+
+<div id="cabelloM" class="pantalla">
+<div class="caja">
+<h1>HIGIENE CORPORAL “El control del olor” </h1>
+<div class="subcaja"><strong><p>Ducha diaria enfocada en zonas de alta sudoración ( axilas, pies) y limpieza genital minuciosa para eliminar bacterias y malos olores. 
+    El secado total de la piel es vital para evitar hongos.</strong></p></div>
+<button onclick="mostrar('cuidadoM')">Volver</button>
+</div>
+</div>
+
+<div id="presentacionM" class="pantalla">
+<div class="caja">
+<h1>HIGIENE BUCODENTAL "La carta de presentación"</h1>
+<div class="subcaja"><strong><p>Cepillado después de cada comida, incluyendo la lengua, que es donde vive el 90% de las 
+    bacterias que causan el mal aliento  y uso de hilo dental para garantizar un aliento fresco y encías sanas.</strong></p></div>
+<button onclick="mostrar('cuidadoM')">Volver</button>
+</div>
+</div>
+
+<!-- SALUD FISICA -->
+<div id="fisicaM" class="pantalla">
+<div class="caja">
+<h1>Tu cuerpo es tu motor. Aliméntalo bien, mantenlo en movimiento y dale el descanso que merece para que nada te detenga.</h1>
+<div class="galeria">
+    <img src="imag/imagen21.jpg">
+    <img src="imag/imagen22.jpg">
+    <img src="imag/imagen25.jpg">
+</div>
+<div class="columna">
+<button onclick="mostrar('alimentacionM')">Alimentación</button>
+<button onclick="mostrar('ejercicioM')">Ejercicio</button>
+<button onclick="mostrar('descansoM')">Descanso</button>
+</div>
+
+<button onclick="mostrar('masculino')">Volver</button>
+</div>
+</div>
+
+<div id="alimentacionM" class="pantalla">
+<div class="caja">
+<h1>ALIMENTACIÓN "Combustible"</h1>
+<div class="subcaja"><strong><p>Es el proceso de elegir e ingerir alimentos para obtener los nutrientes y la energía que el cuerpo necesita. En la adolescencia, 
+    una buena alimentación es el combustible clave para el crecimiento físico, el desarrollo del cerebro y el rendimiento escolar.</strong></p></div>
+<button onclick="mostrar('fisicaM')">Volver</button>
+</div>
+</div>
+
+<div id="ejercicioM" class="pantalla">
+<div class="caja">
+<h1>EJERCICIO “Movimiento”</h1>
+<div class="subcaja"><strong><p>Es cualquier actividad corporal que no solo fortalece los músculos, sino que es el mejor 
+    entrenamiento para que el corazón y los pulmones funcionen al máximo nivel. Mejora la concentración y la agilidad mental.</strong></p></div>
+<button onclick="mostrar('fisicaM')">Volver</button>
+</div>
+</div>
+
+<div id="descansoM" class="pantalla">
+<div class="caja">
+<h1>DESCANSO “Recuperación”</h1>
+<div class="subcaja"><strong><p>Tiempo esencial de recuperación donde el cuerpo y la mente se regeneran. En la adolescencia, 
+    es el momento clave para el crecimiento físico y la consolidación de lo aprendido durante el día.</strong></p></div>
+<button onclick="mostrar('fisicaM')">Volver</button>
+</div>
+</div>
+
+<div id="ejercicioM" class="pantalla">
+<div class="caja">
+<h1>HIGIENE "Íntima"</h1>
+<div class="subcaja"><strong><p>Es el hábito de limpieza específica de los órganos genitales para prevenir infecciones, irritaciones y malos olores. 
+    Es una parte fundamental del autoconocimiento y el respeto por el propio cuerpo. Después de sudar haciendo deporte, la humedad en la zona 
+    genital aumenta el riesgo de bacterias. Es el momento más importante para una ducha y cambio de ropa.
+</strong></p></div>
+<button onclick="mostrar('fisicaM')">Volver</button>
+</div>
+</div>
+
+
+<div id="femenino" class="pantalla">
+<div class="caja">
+<h1>ÁREA FEMENINA</h1>
+
+<div class="columna">
+<button onclick="mostrar('mentalF')">Salud Mental</button>
+<button onclick="mostrar('cuidadoF')">Cuidado Personal</button>
+<button onclick="mostrar('fisicaF')">Salud Física</button>
+</div>
+
+<button onclick="mostrar('inicio')">Volver</button>
+</div>
+</div>
+
+
+<div id="mentalF" class="pantalla">
+<div class="caja">
+<h1>SALUD MENTAL</h1>
+<div class="galeria">
+    <img src="imag/imagen7.jpg">
+    <img src="imag/imagen8.jpg">
+    <img src="imag/imagen9.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('emocionF')">Gestión emocional</button>
+<button onclick="mostrar('autoestimaF')">Autoestima</button>
+<button onclick="mostrar('redesF')">Redes sociales</button>
+<button onclick="mostrar('apoyoF')">Apoyo</button>
+</div>
+
+<button onclick="mostrar('femenino')">Volver</button>
+</div>
+</div>
+<div id="emocionF" class="pantalla">
+<div class="caja">
+<h1>GESTIÓN EMOCIONAL</h1>
+<div class="subcaja">
+<strong><p>Es la capacidad de identificar, entender y expresar nuestras emociones de manera saludable. No se trata de reprimirlas, 
+    sino de aprender a manejarlas para que no nos controlen a nosotros.
+“Tus emociones son como el clima: cambian constantemente. 
+Tú no eres el clima, eres el cielo que lo sostiene todo. Aprende a observar la tormenta sin dejar que te destruya.
+</strong></p>
+</div>
+<button onclick="mostrar('mentalF')">Volver</button>
+</div>
+</div>
+
+<div id="autoestimaF" class="pantalla">
+<div class="caja">
+<h1>AUTOESTIMA</h1>
+<div class="subcaja">
+<strong><p>Es la valoración y el respeto que tienes por ti misma. Es la convicción interna de que tus pensamientos, sentimientos y cuerpo son valiosos por lo que son, no por cómo se ven o por lo que otros digan de ti.
+Abrazar tus virtudes y tus áreas de mejora, poner límites y cuidarte porque sabes que eres importante, creer en tu capacidad para aprender y superar retos.
+</strong></p>
+</div>
+<button onclick="mostrar('mentalF')">Volver</button>
+</div>
+</div>
+
+<div id="redesF" class="pantalla">
+<div class="caja">
+<h1>REDES SOCIALES</h1>
+<div class="subcaja">
+<p><strong>como una vitrina de trofeos: la gente solo publica sus mejores momentos, sus mejores ángulos y sus fotos con filtros. 
+El problema empieza cuando comparamos nuestro día normal (con ojeras, tareas o granitos) con la “vida perfecta” que los demás eligen mostrar en internet.
+Recuerda que detrás de una foto perfecta hubo 50 intentos que salieron mal. Tú no eres un número, tu belleza y tu inteligencia no suben ni bajan por la cantidad de likes que recibes.
+</strong></p>
+</div>
+<button onclick="mostrar('mentalF')">Volver</button>
+</div>
+</div>
+
+<div id="apoyoF" class="pantalla">
+<div class="caja">
+<h1>APOYO</h1>
+<div class="subcaja">
+<strong><p>Es el conjunto de personas (familia, amigas, profesores o profesionales) en quienes confías para compartir tus problemas y emociones. 
+El apoyo no es debilidad; es la inteligencia de saber que somos más fuertes cuando nos acompañamos. 
+Identifica quiénes son las personas que te escuchan sin juzgarte y te hacen sentir segura.</strong></p>
+</div>
+<button onclick="mostrar('mentalF')">Volver</button>
+</div>
+</div>
+
+<div id="cuidadoF" class="pantalla">
+<div class="caja">
+<h1>Cuidado Personal: El apoyo no es debilidad, es la inteligencia de saber que somos más fuertes cuando nos acompañamos. 
+    Identifica quiénes son las personas que te escuchan sin juzgarte y te hacen sentir segura.</h1>
+    <div class="galeria">
+    <img src="imag/imagen10.jpg">
+    <img src="imag/imagen11.jpg">
+    <img src="imag/imagen12.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('pielF')">Piel</button>
+<button onclick="mostrar('higieneF')">Higiene íntima</button>
+<button onclick="mostrar('menstrualF')">Salud menstrual</button>
+<button onclick="mostrar('autoF')">Autocuidado</button>
+</div>
+
+<button onclick="mostrar('femenino')">Volver</button>
+</div>
+</div>
+<div id="pielF" class="pantalla">
+<div class="caja">
+<h1>CUIDADO FACIAL “Skincare”</h1>
+<div class="subcaja">
+<p><strong>el hábito de darle un "respiro" a tu piel cada día. No necesitas mil productos, solo la constancia de limpiar las impurezas para que tus poros respiren y tu rostro se mantenga fresco y saludable.
+Usar bloqueador todos los días, incluso si está nublado, para prevenir manchas y daños a futuro.
+“Tu piel es el reflejo de tu salud interna. Cuídala con suavidad, protégela del sol y deja que brille de forma natural.”
+</strong></p>
+</div>
+<button onclick="mostrar('cuidadoF')">Volver</button>
+</div>
+</div>
+
+<div id="higieneF" class="pantalla">
+<div class="caja">
+<h1>HIGIENE ÍNTIMA “Cuidado de tu zona V”</h1>
+<div class="subcaja">
+<p><strong>zona íntima tiene un sistema de limpieza propio y un pH delicado; por eso, el objetivo es mantenerla limpia y seca sin usar productos que la irriten o la dañen.
+Lava únicamente la vulva (la parte externa) con agua o un jabón muy suave. Nunca laves el interior (la vagina), ella se limpia sola.
+"Menos es más: tu zona íntima es sabia y se cuida sola. Tú solo ayúdala manteniéndola seca, fresca y cómoda."
+</strong></p>
+</div>
+<button onclick="mostrar('cuidadoF')">Volver</button>
+</div>
+</div>
+
+<div id="menstrualF" class="pantalla">
+<div class="caja">
+<h1>Salud menstrual</h1>
+<div class="subcaja">
+<p><strong>entender que tu cuerpo cambia cada mes, saber cómo mantenerte limpia y cómoda en esos días, y no sentir vergüenza por algo que es totalmente natural y saludable.
+Trata de cambiar tu toallita o tampón cada 4 horas para sentirte siempre fresca y evitar accidentes.
+“Tener el periodo es señal de que tu cuerpo es fuerte y sano. ¡Vívelo con calma y sin secretos!”
+</strong></p>
+</div>
+<button onclick="mostrar('cuidadoF')">Volver</button>
+</div>
+</div>
+
+<div id="autoF" class="pantalla">
+<div class="caja">
+<h1>AUTOCUIDADO</h1>
+<div class="subcaja">
+<p><strong>aprender a escucharte y darte lo que necesitas para estar bien. No es un lujo, es dedicarte unos minutos al día para recargar pilas, sentirte cómoda en tu piel y cuidar tu salud para que puedas cumplir todo lo que te propongas.
+Haz algo que te guste (leer, bailar, skincare) solo porque te hace feliz.
+“Eres única y valiosa. Trátate con la misma ternura y respeto con la que tratarías a tu mejor amiga.”
+</strong></p>
+</div>
+<button onclick="mostrar('cuidadoF')">Volver</button>
+</div>
+</div>
+<div id="fisicaF" class="pantalla">
+<div class="caja">
+<h1>SALUD FÍSICA</h1>
+<div class="galeria">
+    <img src="imag/imagen13.jpg">
+    <img src="imag/imagen14.jpg">
+    <img src="imag/imagen13.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('ejercicioF')">Ejercicio</button>
+<button onclick="mostrar('alimentacionF')">Alimentación</button>
+<button onclick="mostrar('descansoF')">Descanso</button>
+</div>
+
+<button onclick="mostrar('femenino')">Volver</button>
+</div>
+</div>
+<div id="ejercicioF" class="pantalla">
+<div class="caja">
+<h1>EJERCICIO</h1>
+<div class="subcaja">
+<p><strong>poner tu cuerpo en movimiento para fortalecer tu corazón, tus huesos y tus músculos. No se trata solo de “hacer deporte”, sino de darle a tu cuerpo la actividad que necesita para liberar estrés y sentirse lleno de energía. 
+Elige lo que te guste: bailar, saltar la cuerda o caminar. ¡Todo movimiento cuenta!
+</strong></p>
+</div>
+<button onclick="mostrar('fisicaF')">Volver</button>
+</div>
+</div>
+
+<div id="alimentacionF" class="pantalla">
+<div class="caja">
+<h1>ALIMENTACIÓN</h1>
+<div class="subcaja">
+<p><strong>darle a tu cuerpo el combustible de mejor calidad para que funcione correctamente. En la adolescencia, 
+    comer bien no es “hacer dieta”, es elegir alimentos que te ayuden a crecer, 
+    pensar mejor y tener la energía necesaria para cumplir tus metas.</strong></p>
+</div>
+<button onclick="mostrar('fisicaF')">Volver</button>
+</div>
+</div>
+
+<div id="descansoF" class="pantalla">
+<div class="caja">
+<h1>DESCANSO</h1>
+<div class="subcaja">
+<p><strong>el tiempo sagrado en el que tu cuerpo se repara y tu cerebro procesa todo lo aprendido. 
+    No es tiempo perdido; es el proceso biológico necesario para que tus hormonas se equilibren y puedas despertar con la mente clara y el cuerpo con energía. 
+Dormir bien es el mejor remedio contra la irritabilidad, la ansiedad y la falta de </strong></p>
+</div>
+<button onclick="mostrar('fisicaF')">Volver</button>
+</div>
+</div>
+<div id="general" class="pantalla">
+<div class="caja">
+<h1>ZONA GENERAL</h1>
+
+<div class="columna">
+<button onclick="mostrar('emocionalG')">Salud Emocional</button>
+<button onclick="mostrar('habitosG')">Hábitos Saludables</button>
+<button onclick="mostrar('chatbotPantalla')">
+    Asistente Virtual 💬
+</button>
+</div>
+
+<button onclick="mostrar('inicio')">Volver</button>
+</div>
+</div>
+
+<div id="emocionalG" class="pantalla">
+<div class="caja">
+<h1>SALUD EMOCIONAL</h1>
+<div class="galeria">
+    <img src="imag/imagen23.jpg">
+    <img src="imag/imagen24.jpg">
+    <img src="imag/imagen23.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('controlG')">Control emocional</button>
+<button onclick="mostrar('comunicacionG')">Comunicación</button>
+<button onclick="mostrar('relacionesG')">Relaciones</button>
+</div>
+
+<button onclick="mostrar('general')">Volver</button>
+</div>
+</div>
+
+<div id="controlG" class="pantalla">
+<div class="caja">
+<h1>TU PAZ NO DEPENDE DE UN LIKE</h1>
+<div class="subcaja">
+<p>Recordar que lo que vemos en redes es un “resumen editado” de la vida de los demás, no la realidad completa. Tú valor como persona no sube ni baja según la cantidad de reacciones en una foto o si alguien te dejó “en visto. 
+“A veces pasamos horas revisando quién vio nuestra historia, quién nos dio ‘me gusta’ o por qué alguien no reaccionó a nuestra foto. Sin darnos cuenta, le entregamos el control de nuestro estado de ánimo a una pantalla. Pero recuerda esto: Tu paz no puede depender de un  ‘like’
+</p>
+</div>
+<button onclick="mostrar('emocionalG')">Volver</button>
+</div>
+</div>
+
+<div id="comunicacionG" class="pantalla">
+<div class="caja">
+<h1>TUS PALABRAS Y CILENCIOS IMPORTAN</h1>
+<div class="subcaja">
+<p><strong>responsable afectivamente no significa ser perfecto, sino ser honesto. Es entender que del otro lado de la pantalla hay una persona con sentimientos, miedos y expectativas, igual que tú.
+Si alguien te dice que algo que hiciste le dolió, no respondas con un “exageras” o “estás loco/a”. Escuchar y tratar de entender su punto de vista es ser responsable.
+“Nadie está obligado a quererte, pero todos están obligados a respetarte.”
+</strong></p>
+</div>
+<button onclick="mostrar('emocionalG')">Volver</button>
+</div>
+</div>
+
+<div id="relacionesG" class="pantalla">
+<div class="caja">
+<h1>NO ERES LO QUE PIENSAS</h1>
+<div class="subcaja">
+<p><strong> veces, cuando estamos cansados, tristes o bajo mucha presión, nuestra mente empieza a generar pensamientos automáticos: 'no puedes', 'no eres suficiente', 'todos son mejores que tú'.
+Tienes que saber algo: Tú no eres esos pensamientos. Tú eres quien los escucha. Los pensamientos son como nubes que pasan; algunos son grises y oscuros, pero no son el cielo. El cielo siempre está ahí, y ese eres tú."
+"Trátate como tratarías a tu mejor amigo. Si no le dirías algo tan feo a él, ¿por qué te lo dices a ti?"
+</strong></p>
+</div>
+<button onclick="mostrar('emocionalG')">Volver</button>
+</div>
+</div>
+
+<div id="habitosG" class="pantalla">
+<div class="caja">
+<h1>HÁBITOS SALUDABLES</h1>
+<div class="galeria">
+    <img src="imag/imagen25.jpg">
+    <img src="imag/imagen26.jpg">
+    <img src="imag/imagen27.jpg">
+</div>
+
+<div class="columna">
+<button onclick="mostrar('alimentacionG')">Alimentación</button>
+<button onclick="mostrar('suenoG')">Leer</button>
+<button onclick="mostrar('rutinaG')">Música</button>
+</div>
+
+<button onclick="mostrar('general')">Volver</button>
+</div>
+</div>
+
+<div id="alimentacionG" class="pantalla">
+<div class="caja">
+<h1>LEER: “Viajar sin moverte”</h1>
+<div class="subcaja">
+<p><strong>algo que te guste (no solo lo de la escuela) reduce el estrés y mejora tu concentración. Es como darle un gimnasio a tu imaginación. No tienes que leer un libro de 500 páginas. Un cómic, un artículo sobre algo que te apasione o un poema cuentan. 
+Lo importante es el hábito de enfocarte en algo con calma. </strong></p>
+</div>
+<button onclick="mostrar('habitosG')">Volver</button>
+</div>
+</div>
+
+<div id="suenoG" class="pantalla">
+<div class="caja">
+<h1>ESCUCHAR MÚSICA</h1>
+<div class="subcaja">
+<p><strong>música tiene el poder de cambiar tu estado de ánimo en segundos. Puede ayudarte a concentrarte, a desahogarte cuando estás triste o a motivarte cuando no tienes ganas de nada.
+Si estás triste, a veces una canción alegre ayuda a subir el ánimo, y a veces una triste ayuda a validar lo que sientes. Tú eliges qué necesita tu corazón hoy.
+</strong></p>
+</div>
+<button onclick="mostrar('habitosG')">Volver</button>
+</div>
+</div>
+
+<div id="rutinaG" class="pantalla">
+<div class="caja">
+<h1>BAILAR:“Sacúdete el estrés"</h1>
+<div class="subcaja">
+<p><strong> bailas, tu cerebro libera endorfinas y dopamina (las hormonas de la felicidad). Es imposible terminar de bailar y no sentirte aunque sea un poquito mejor.
+“Si tuviste un día horrible en la escuela, llega a tu casa, pon tu canción favorita a todo volumen y báilala como si nadie te estuviera viendo. Solo 5 minutos bastan para ‘resetear’ tu mal humor”.
+</strong></p>
+</div>
+<button onclick="mostrar('habitosG')">Volver</button>
+</div>
+
+</div>
+<div id="chatbotPantalla" class="pantalla">
+    <div class="caja">
+
+        <h1>Asistente Virtual 💬</h1>
+
+        <div id="chatMensajes">
+            <div class="bot">
+                Hola, soy tu asistente. Pregúntame sobre salud y bienestar.
+            </div>
+        </div>
+
+        <input type="text" id="pregunta"
+        placeholder="Escribe tu pregunta...">
+
+        <button onclick="responder()">Enviar</button>
+
+        <button onclick="mostrar('general')">
+            Volver
+        </button>
+
+    </div>
+</body>
+</html>
